@@ -1,13 +1,15 @@
 # Stash — Marketing Website
 
-Pre-launch landing page for [Stash](https://github.com/Rengusky/stash), the calm personal library app for iPhone, iPad and Mac. Static HTML/CSS/JS, no build step.
+Pre-launch landing page for [Stash](https://github.com/Rengusky/stash), the calm personal library app for iPhone, iPad and Mac. Static site, no build step — `three` and `gsap` load from the jsDelivr CDN via an import map.
+
+The page is a single interactive section: saved-item cards drift in a WebGL scene, gather when the email field is focused, and stack tidily on signup.
 
 ## Structure
 
 ```
-index.html    single-page landing
-styles.css    all styles (light/dark via prefers-color-scheme)
-script.js     hero animation + waitlist form submit
+index.html    single-section landing
+styles.css    all styles
+main.js       Three.js scene, GSAP micro-interactions, waitlist submit
 assets/       favicon, future screenshots
 ```
 
@@ -17,7 +19,7 @@ The waitlist form posts to [Formspree](https://formspree.io):
 
 1. Create a free Formspree account and a new form (name it "Stash waitlist").
 2. Copy the form ID from the endpoint it gives you (`https://formspree.io/f/<FORM_ID>`).
-3. In `script.js`, replace `YOUR_FORM_ID` in `FORMSPREE_ENDPOINT` with the real ID.
+3. In `main.js`, replace `YOUR_FORM_ID` in `FORMSPREE_ENDPOINT` with the real ID.
 
 Submissions appear in the Formspree dashboard and can be exported as CSV.
 
