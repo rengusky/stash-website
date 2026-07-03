@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stash — Saved, not forgotten</title>
-  <meta name="description" content="Stash is a calm home for the links and images you save — it files them, then reminds you to come back. Join the waitlist.">
-  <meta property="og:title" content="Stash — Saved, not forgotten">
+  <title>Stash — Save links, images & videos. Actually see them again.</title>
+  <meta name="description" content="Stash keeps the links, images — and soon videos — you save from anywhere, files them into folders, and reminds you to come back. Join the waitlist.">
+  <meta property="og:title" content="Stash — Links. Images. Videos. Saved, not forgotten.">
   <meta property="og:description" content="A calm home for everything you save. Files itself, reminds you later. Join the waitlist.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -35,13 +35,14 @@
 
     <main class="stage">
       <h1 class="headline">
-        <span class="line"><span class="line-inner">SAVED,</span></span>
-        <span class="line"><span class="line-inner">NOT&nbsp;FORGOTTEN.</span></span>
+        <span class="line"><span class="line-inner"><span class="w-link">LINKS.</span> <span class="w-image">IMAGES.</span> <span class="w-video">VIDEOS<sup>*</sup>.</span></span></span>
+        <span class="line"><span class="line-inner">SAVED, NOT&nbsp;FORGOTTEN.</span></span>
       </h1>
+      <p class="headline-note">*videos coming soon</p>
 
       <p class="sub">
-        Stash is a calm home for the links and images you save —
-        it files them, then reminds you to come back.
+        Stash keeps everything you save from anywhere, files it
+        into folders, and reminds you to come back to it.
       </p>
 
       <form class="waitlist" data-waitlist action="#" method="POST">
@@ -50,6 +51,8 @@
         <button type="submit" data-magnetic><span>Get early access</span></button>
         <p class="form-note" role="status" aria-live="polite"></p>
       </form>
+
+      <p class="hint" data-hint>Try it — drag a card into the box.</p>
     </main>
 
     <footer class="baseline">
@@ -58,6 +61,7 @@
     </footer>
   </div>
 
+  <p class="counter" data-counter aria-hidden="true"></p>
   <div class="cursor" aria-hidden="true"></div>
 
   <script type="module" src="main.js"></script>

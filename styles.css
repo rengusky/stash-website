@@ -1,10 +1,13 @@
 /* ============ Tokens ============ */
 :root {
-  --canvas: #EEF0F2;
+  --canvas: #F4F2ED;
   --ink: #111417;
   --ink-soft: #62676E;
   --accent: #0A84FF;
   --accent-ink: #FFFFFF;
+  --type-link: #0A84FF;
+  --type-image: #E1306C;
+  --type-video: #FF3B30;
   --hairline: rgba(17, 20, 23, 0.14);
   --font: "Archivo", -apple-system, sans-serif;
 }
@@ -129,7 +132,27 @@ body {
 
 .line-inner {
   display: inline-block;
+  white-space: nowrap;
   transform: translateY(115%);
+}
+
+.w-link { color: var(--type-link); }
+.w-image { color: var(--type-image); }
+.w-video { color: var(--type-video); }
+
+.headline sup {
+  font-size: 0.35em;
+  font-weight: 700;
+  vertical-align: super;
+}
+
+.headline-note {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  opacity: 0;
 }
 
 .sub {
@@ -193,6 +216,39 @@ body {
 .form-note.is-success { color: #178A43; font-weight: 600; }
 .form-note.is-error { color: #C93A2B; }
 
+/* ============ Hint & counter ============ */
+.hint {
+  margin: 18px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  opacity: 0;
+}
+
+.hint::before {
+  content: "↯ ";
+  color: var(--accent);
+}
+
+.counter {
+  position: fixed;
+  top: 0; left: 0;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* ============ Cursor ============ */
 .cursor {
   position: fixed;
@@ -204,7 +260,13 @@ body {
   pointer-events: none;
   z-index: 4;
   opacity: 0;
+  transition: background-color 0.2s;
 }
+
+body.is-card-hover .cursor { background: var(--accent); }
+
+body.is-dragging { user-select: none; -webkit-user-select: none; }
+body.is-dragging .cursor { background: var(--accent); }
 
 @media (pointer: coarse) {
   .cursor { display: none; }
@@ -213,8 +275,8 @@ body {
 /* ============ Motion & small screens ============ */
 @media (prefers-reduced-motion: reduce) {
   .line-inner { transform: none; }
-  .sub, .waitlist { opacity: 1; }
-  .cursor { display: none; }
+  .sub, .waitlist, .headline-note { opacity: 1; }
+  .cursor, .hint { display: none; }
 }
 
 @media (max-width: 640px) {

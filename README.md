@@ -2,7 +2,7 @@
 
 Pre-launch landing page for [Stash](https://github.com/Rengusky/stash), the calm personal library app for iPhone, iPad and Mac. Static site, no build step — `three` and `gsap` load from the jsDelivr CDN via an import map.
 
-The page is a single interactive section: saved-item cards drift in a WebGL scene, gather when the email field is focused, and stack tidily on signup.
+The page is a single interactive section: link, image, and video cards drift in a WebGL scene and can be dragged (tapped on mobile) into a kraft "STASH" box, where they file themselves. Focusing the email field gathers the remaining cards; signing up stashes them all.
 
 ## Structure
 
