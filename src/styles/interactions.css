@@ -277,6 +277,14 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
 html, body { overflow-x: hidden; }
 
 @media (max-width: 760px) {
+  /* Match the mobile design: no top nav, no hero button, bolder headline, short intro */
+  .nav { display: none; }
+  .hero { padding-top: 26px; }
+  .hero h1 { font-weight: var(--fw-bold); }
+  .hero h1 br { display: inline; }
+  .hero-cta { display: none; }
+  .intro-more { display: none; }
+
   /* Hero: show ONLY the iPhone, centered — no oversized/scaled Mac that overflows */
   .demo-wrap {
     position: static;

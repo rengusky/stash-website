@@ -170,3 +170,11 @@ Fixed 5 mobile issues (appended a "Mobile optimizations" block at the end of int
 5. **TestFlight CTA.** All three `.pill` buttons (nav + hero "Join Sneak Peek!", closing "Join Test Flight") now link to `https://testflight.apple.com/join/StmCpgpn` (`target=_blank rel=noopener noreferrer`).
 
 **Verify:** build passes (CSS 26.25 kB); desktop unchanged (both devices in hero); mobile hero/moodboards/footer confirmed via in-app browser screenshots at 390px; 0 horizontal-overflow offenders. Pushed to `main` → Vercel auto-deploy.
+
+## 2026-09-06 — Align mobile hero to Figma reference
+User shared the mobile design (Figma `ZRcbdxA3EPk7AHnt2TV7Zo`, node `738-994`) and said "build same as the design". Compared it against the live mobile build — cards/closing/footer already matched (our wrapping moodboard chips are actually cleaner than the Figma, where "Tec"/"Colors" clip). Applied the four hero deltas, mobile-scoped (≤760px) so desktop is unchanged:
+1. **No top nav on mobile** (`.nav { display:none }`); hero padding-top tightened to 26px.
+2. **No hero CTA button on mobile** (`.hero-cta { display:none }`) — mobile's only CTA is now the bottom "Join Test Flight" (per the design).
+3. **Bolder headline** (`.hero h1 { font-weight:700 }`) + controlled 2-line break re-enabled.
+4. **Short hero intro on mobile:** wrapped the extra sentence in `<span class="intro-more">` and hid it ≤760px; mobile shows only "Screenshots, links, images, reels."
+Also added "!" to the headline ("…in one place!") — shared copy, so it shows on desktop too (flagged and approved). Verified at 390px: 0 overflow, nav/CTA/intro-more hidden, h1 weight 700; desktop still has nav + hero button + full intro. Pushed to `main` → Vercel auto-deploy.
