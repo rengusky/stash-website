@@ -271,3 +271,53 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
   .join-word { top: 48%; bottom: auto; font-size: 35vw; }
   footer .shell { flex-direction: row; padding-block: 0; }
 }
+
+/* ============================ Mobile optimizations ============================ */
+/* No horizontal panning: nothing may extend past the viewport width. */
+html, body { overflow-x: hidden; }
+
+@media (max-width: 760px) {
+  /* Hero: show ONLY the iPhone, centered — no oversized/scaled Mac that overflows */
+  .demo-wrap {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    left: auto;
+    transform: none;
+    margin: var(--space-gap) auto 0;
+    padding: 0 0 8px;
+    display: flex;
+    justify-content: center;
+  }
+  .desktop-app { display: none; }
+  .phone {
+    position: static;
+    inset: auto;
+    width: min(250px, 62vw);
+    margin: 0 auto;
+    transform: none;
+  }
+  .phone:hover { transform: none; }
+
+  /* Closing section is full-bleed — the old card side margin overflowed the viewport */
+  .join { margin-inline: 0; }
+
+  /* Moodboard chips: larger, readable text */
+  .moodboard-row { font-size: 15px; }
+}
+
+@media (max-width: 500px) {
+  .demo-wrap { margin-top: 36px; }
+  .phone { width: min(240px, 66vw); }
+
+  /* Moodboard chips: bigger text; wrap and center so they never clip at the edges */
+  .workflow-board { grid-template-rows: 410px 250px 205px 264px; }
+  .moodboard-tags { top: 100px; right: 12px; left: 12px; }
+  .moodboard-row { font-size: 15px; height: auto; flex-wrap: wrap; }
+  .moodboard-row span { padding: 4px 10px; }
+  .moodboard-row-top { padding-inline: 0; justify-content: center; gap: 6px; row-gap: 8px; }
+  .moodboard-row-bottom { width: 100%; margin-top: 8px; justify-content: center; gap: 6px; row-gap: 8px; }
+
+  /* Footer: spread the wordmark and credit apart (was bunched centered with an 8px gap) */
+  footer .shell { justify-content: space-between; gap: 12px; padding-inline: 22px; }
+}

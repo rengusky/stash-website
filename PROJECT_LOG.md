@@ -159,3 +159,14 @@ Resolved the "Production Branch = main = old site" trap so Git↔Vercel is safe.
 After the user authorized the Vercel GitHub App on the repo, `vercel git connect --yes` (run from the linked project dir) succeeded → project `stash-website` now connected to `rengusky/stash-website`, Production Branch `main`. Confirmed end-to-end: pushed an empty commit to `main` → a **git-sourced production deployment** built and went Ready (`stash-website-fqudbmt3s…`), production alias `stash-website-three.vercel.app` serving it (home/assets/privacy all 200). **Pushing to `main` now auto-deploys to production; PRs get preview deployments.** Manual `vercel --prod` no longer needed for routine deploys.
 
 **Remaining (optional, user's call):** custom domain (then re-point the hardcoded absolute SEO URLs to it), disable the old GitHub Pages site, delete the merged `vite-redesign` branch.
+
+## 2026-09-06 — Mobile optimization + TestFlight CTA
+Fixed 5 mobile issues (appended a "Mobile optimizations" block at the end of interactions.css so it wins by source order without fighting main.css). Verified in a real browser at 390px via the in-app DevTools (JS measurement, not just headless screenshots — headless fell back to a wider system font and produced misleading "clipping").
+
+1. **iPhone-only hero on mobile.** `.desktop-app { display:none }` at ≤760px; the old `.demo-wrap` used a fixed `720px` width + `translateX(-50%) scale()` that overflowed. Replaced with static, `width:100%`, centered flex; `.phone` made `position:static`, centered, `width:min(250px,62vw)` (240/66vw at ≤500).
+2. **No horizontal panning.** Root cause found via JS (`document.querySelectorAll('*')` → elements past viewport): the closing **`.join`** section still had `margin-inline:12px` (leftover from the old card design) while being `width:100%` full-bleed → 12px overflow. Fixed with `.join { margin-inline:0 }` at ≤760px. Also added `html,body { overflow-x:hidden }` as a guard. After: `bodyScrollWidth == viewport`, 0 offenders.
+3. **Moodboard chips too small.** Bumped chip `font-size` 14→15px; rows now `flex-wrap:wrap` + centered with row-gap so the 5-/4-chip rows wrap instead of clipping at the edges; moodboards grid row 220→250px so wrapped tags fit inside the card (verified 18px clearance).
+4. **Footer spacing.** On mobile it was `justify-content:center` with an 8px gap (wordmark + credit bunched in the middle). Changed to `space-between` (Stash left, credit right), padding-inline 22px.
+5. **TestFlight CTA.** All three `.pill` buttons (nav + hero "Join Sneak Peek!", closing "Join Test Flight") now link to `https://testflight.apple.com/join/StmCpgpn` (`target=_blank rel=noopener noreferrer`).
+
+**Verify:** build passes (CSS 26.25 kB); desktop unchanged (both devices in hero); mobile hero/moodboards/footer confirmed via in-app browser screenshots at 390px; 0 horizontal-overflow offenders. Pushed to `main` → Vercel auto-deploy.
