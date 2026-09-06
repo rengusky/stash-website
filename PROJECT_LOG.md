@@ -144,3 +144,13 @@ Deployed the Vite site to **Vercel** (CLI, authed as `ranga190495-7028`). Live: 
 - **Git↔Vercel auto-connect FAILED** during link ("Make sure … you have access to the repository") — the Vercel GitHub App isn't installed/authorized for `rengusky/stash-website` under this Vercel scope. So deploys are currently **manual CLI** (`vercel --prod`), not push-triggered.
 
 **Open — connecting Git to Vercel (recommended, needs user action):** two prerequisites before wiring auto-deploy: (1) install/authorize the **Vercel GitHub App** on `rengusky/stash-website` (dashboard OAuth — user must do this); (2) decide the **Production Branch** — `main` still holds the OLD Three.js site, so connecting as-is would deploy the old site to prod. Either merge `vite-redesign` → `main` first, or set Vercel's Production Branch to `vite-redesign`. Custom domain + updating the absolute SEO URLs again also pending.
+
+## 2026-09-06 — Cutover: merged to main, retired GitHub Pages
+Resolved the "Production Branch = main = old site" trap so Git↔Vercel is safe.
+
+- **Retired the GitHub Pages workflow** (`.github/workflows/pages.yml`, commit `0a10a16`): it published the repo root with no build step, so a push to `main` would have served unbuilt Vite source. Hosting is Vercel now. (`.github` is now empty/gone on main; `.nojekyll` left, harmless. The last Pages deployment stays frozen until Pages is disabled in repo settings.)
+- **Merged PR #1** (`vite-redesign` → `main`, merge commit `9431a5e`). `main` is now the Vite site (old `index.html`/`styles.css`/`main.js` gone, `src/` present). Local synced to `main`. Remote `vite-redesign` branch left (not deleted).
+- **Production stayed healthy** throughout (Vercel is CLI-deployed, independent of the merge): live site still the Vite site.
+- **Git auto-deploy still NOT firing:** after the merge (a push to `main`) no git-sourced Vercel deployment appeared — only the two manual CLI deploys. So although the user reports connecting the page to GitHub, Vercel is not auto-deploying `rengusky/stash-website` yet. Likely the Vercel GitHub App still lacks repo access (the CLI auto-connect had errored). **To finish:** in the Vercel dashboard → project `stash-website` → Settings → Git, connect `rengusky/stash-website` with Production Branch = `main`; then pushes auto-deploy. Until then, deploy manually with `vercel --prod` from the project dir.
+
+**Still open:** custom domain (+ re-point absolute SEO URLs), optionally disable GitHub Pages, optionally delete the merged `vite-redesign` branch.
