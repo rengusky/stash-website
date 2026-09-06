@@ -118,3 +118,18 @@ Symptom: the "Bricolage Grotesque" title font wasn't showing even though the CSS
 **⚠️ Deployment caveat (must resolve before any `main` cutover):** old site = Pages from `main` root, no build. This version needs `npm run build`. Merging as-is breaks Pages (it would serve the unbuilt `index.html` referencing `/src/...`). Options: (1) update `pages.yml` to build Vite and publish `dist/`, or (2) host on Vercel/Netlify and repoint the domain. Until cutover, `main`/live site are safe.
 
 **Note:** the repo's `.github` and old site reference `Rengusky/stash` (the app repo) — the marketing site repo is `rengusky/stash-website`.
+
+## 2026-09-06 — SEO pass
+Added technical SEO to the site (on branch `vite-redesign`, part of PR #1). Commit `bca9fe4`.
+
+- **`<head>` meta:** keyword-rich `description`, `keywords`, `author`, `robots` (`index,follow,max-image-preview:large`), `theme-color` `#f8492f`, `application-name`/`apple-mobile-web-app-title`. Title → "Stash — Save your inspiration in one place · iPhone, iPad & Mac".
+- **Canonical + favicons:** `<link rel=canonical>` + `icon`/`mask-icon`/`apple-touch-icon` → `assets/favicon.svg` (relative, so it works both at the Pages subpath and a future custom-domain root).
+- **Open Graph + Twitter** `summary_large_image` cards (title/description/url/image + dimensions + alt).
+- **OG image:** built a branded **1200×630** card (coral + warm paper + Bricolage, giant "S" watermark) via headless Chrome from a scratch HTML → `public/assets/og-cover.png` (so social shares render a real preview, not a broken one).
+- **JSON-LD** `@graph`: `Organization` + `WebSite` + `SoftwareApplication` (free offer, `iOS, iPadOS, macOS`, featureList). Validated as parseable JSON.
+- **`public/robots.txt`** (allow all + sitemap) and **`public/sitemap.xml`** (`/` + `/privacy.html`).
+- **`privacy.html`:** added `robots` + `canonical` (it already had a good description + favicon).
+
+**Verify:** `npm run build` passes; JSON-LD parses (`Organization, WebSite, SoftwareApplication`); dev server serves og-cover.png / robots.txt / sitemap.xml / favicon.svg / privacy.html all 200; canonical + og:image render with correct absolute URLs.
+
+**⚠️ Domain caveat:** absolute URLs (canonical, og:image, sitemap) currently use the Pages URL `https://rengusky.github.io/stash-website/`. **Update these when a custom domain is set at launch.** Also: because Pages serves at the `/stash-website/` subpath, the app's root-absolute asset refs (`/assets/whystash/*.svg` in CSS) will 404 there — needs a Vite `base` config OR a custom-domain-root / different host. Rolled into the deployment cutover work.
