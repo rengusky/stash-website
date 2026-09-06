@@ -1,0 +1,122 @@
+/* ============================================================================
+   Stash Landing — Design Tokens
+   ----------------------------------------------------------------------------
+   Single source of truth for color, type, space, radius, elevation and motion.
+   main.css and interactions.css consume these; avoid raw values there.
+
+   VEGA-ALIGNED. Mirrors the conventions of the in-house component library at
+   ~/Documents/vega (vega-ui):
+     · Colors are HSL triplets, consumed as hsl(var(--x)) or hsl(var(--x) / a)
+       — same pattern as Vega's --background / --foreground / --primary.
+     · A single --radius scalar drives rounded surfaces (Vega "xl" step = 25px,
+       which happens to equal Stash's card radius).
+     · A 6-step ambient+key shadow scale, copied from Vega's boxShadow scale.
+     · A 7-step spacing scale matching Vega's src/lib/tokens.ts (Tailwind steps).
+   Themed for Stash: brand coral + warm paper replace Vega's neutral shadcn base,
+   so Stash's brand drives --primary. Typography is additive (Vega has none).
+   To re-tint the whole page, change --brand once.
+   ============================================================================ */
+:root {
+  /* ── Color · brand (Stash coral) ──────────────────────────────────────── */
+  --brand:        8 93% 58%;    /* #F8492F — Stash coral */
+  --brand-strong: 9 73% 49%;    /* #D93C22 — hover / pressed */
+  --brand-tint:   10 89% 78%;   /* #F9A595 — focus ring */
+
+  /* ── Color · surfaces & ink (Vega semantic names) ─────────────────────── */
+  --background:   38 33% 95%;   /* #F7F4EF — warm paper page ground */
+  --surface:      0 0% 100%;    /* #FFFFFF — card surface */
+  --surface-warm: 48 38% 97%;   /* #FBFAF6 — closing section */
+  --foreground:   36 11% 9%;    /* #1A1815 — ink text */
+  --primary:              var(--brand);   /* Stash themes Vega's primary → coral */
+  --primary-foreground:   0 0% 100%;      /* text/icon on brand */
+
+  /* ── Color · overlays on imagery (glass) ──────────────────────────────── */
+  --glass-dark:  0 0% 0%;       /* black, always used at alpha */
+  --glass-light: 0 0% 100%;     /* white, always used at alpha */
+  --accent-caret: 220 50% 55%;  /* #5379C5 — search-field caret */
+
+  /* ── Color · legacy aliases (resolve existing var() references) ────────── */
+  --paper:    hsl(var(--background));
+  --ink:      hsl(var(--foreground));
+  --white:    hsl(36 38% 97%);              /* #FBF9F6 warm white */
+  --red:      hsl(var(--brand));
+  --on-brand: hsl(var(--primary-foreground));
+  --muted:    hsl(var(--foreground) / .58);
+  --line:     hsl(var(--foreground) / .11);
+
+  /* ── Typography · families (additive — Vega ships no type tokens) ─────── */
+  --font-title: "Bricolage Grotesque", Outfit, sans-serif;
+  --font-body:  Outfit, system-ui, sans-serif;
+  --font-mono:  "IBM Plex Mono", monospace;
+
+  /* ── Typography · weights ─────────────────────────────────────────────── */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* ── Typography · fluid display sizes ─────────────────────────────────── */
+  --fs-hero:     clamp(54px, 6.3vw, 74px);   /* hero h1 */
+  --fs-section:  clamp(42px, 4vw, 54px);      /* "Why Stash?" h2 */
+  --fs-closing:  clamp(40px, 3.15vw, 48px);   /* closing h2 */
+  --fs-wordmark: clamp(260px, 28vw, 424px);   /* oversized STASH */
+
+  /* ── Typography · text sizes ──────────────────────────────────────────── */
+  --fs-intro:      18.5px;
+  --fs-card-title: 24px;
+  --fs-card-body:  16px;
+  --fs-ui:         14.5px;
+  --fs-mono:       11px;
+
+  /* ── Spacing · Vega 7-step (px = Tailwind 1/2/3/4/6/8/16) ──────────────── */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   12px;
+  --space-base: 16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  64px;
+  /* page rhythm (landing-specific, additive) */
+  --space-gap:     48px;   /* CTA → device mockups */
+  --space-section: 96px;   /* section top margins */
+  --space-block:   110px;  /* large vertical blocks */
+
+  /* ── Radius · Vega scalar + Stash scale ───────────────────────────────── */
+  --radius:      25px;     /* primary rounded surface (= Vega xl "Round") */
+  --radius-xs:   6px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   var(--radius);   /* 25px — card surfaces */
+  --radius-2xl:  42px;            /* hero image-analysis card */
+  --radius-pill: 9999px;
+
+  /* ── Elevation · Vega 6-step ambient+key scale (neutral) ──────────────── */
+  --shadow-sm:  0 1px 3px 0 hsl(0 0% 0% / .08), 0 1px 2px -1px hsl(0 0% 0% / .08);
+  --shadow-md:  0 4px 8px -2px hsl(0 0% 0% / .10), 0 2px 4px -2px hsl(0 0% 0% / .06);
+  --shadow-lg:  0 10px 20px -4px hsl(0 0% 0% / .12), 0 4px 8px -4px hsl(0 0% 0% / .07);
+  --shadow-xl:  0 20px 32px -8px hsl(0 0% 0% / .14), 0 8px 16px -8px hsl(0 0% 0% / .08);
+  --shadow-2xl: 0 32px 48px -12px hsl(0 0% 0% / .20), 0 12px 24px -12px hsl(0 0% 0% / .10);
+
+  /* ── Elevation · Stash component shadows (brand/ink-tinted signatures) ──── */
+  --shadow-pill:       0 10px 21px hsl(var(--brand) / .3);
+  --shadow-pill-hover: 0 14px 26px hsl(var(--brand) / .4);
+  --shadow-device:     0 24px 26px hsl(var(--foreground) / .14);
+  --shadow-phone:      0 24px 24px hsl(var(--foreground) / .2);
+  --shadow-glass:      0 0 10px hsl(0 0% 0% / .15), inset 0 1px 0 hsl(0 0% 100% / .22);
+
+  /* ── Motion · Vega springs translated to CSS ──────────────────────────── */
+  --ease-out: cubic-bezier(.22, .61, .36, 1);   /* decelerate (reveals, parallax) */
+  --ease-pop: cubic-bezier(.34, 1.35, .5, 1);   /* spring overshoot (≈ Vega SPRING_SNAPPY) */
+  --dur-press:  .2s;   /* button press feedback */
+  --dur-reveal: .5s;   /* scroll-reveal base */
+
+  /* ── Layout ───────────────────────────────────────────────────────────── */
+  --shell-max: 1180px;
+  --shell-pad: 32px;
+  --z-scrim:   30;
+  --z-closing: 31;
+  --z-footer:  32;
+}

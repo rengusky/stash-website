@@ -1,69 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stash — Save links, images & videos. Actually see them again.</title>
-  <meta name="description" content="Stash keeps the links, images — and soon videos — you save from anywhere, files them into folders, and reminds you to come back. Join the waitlist.">
-  <meta property="og:title" content="Stash — Links. Images. Videos. Saved, not forgotten.">
-  <meta property="og:description" content="A calm home for everything you save. Files itself, reminds you later. Join the waitlist.">
-  <meta property="og:type" content="website">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
-        "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm"
-      }
-    }
-  </script>
-</head>
-<body>
-
-  <canvas id="scene" aria-hidden="true"></canvas>
-  <div class="grain" aria-hidden="true"></div>
-
-  <div class="page">
-    <header class="topbar">
-      <p class="wordmark">STASH</p>
-      <p class="coming">Coming soon — iPhone · iPad · Mac</p>
-    </header>
-
-    <main class="stage">
-      <h1 class="headline">
-        <span class="line"><span class="line-inner"><span class="w-link">LINKS.</span> <span class="w-image">IMAGES.</span> <span class="w-video">VIDEOS<sup>*</sup>.</span></span></span>
-        <span class="line"><span class="line-inner">SAVED, NOT&nbsp;FORGOTTEN.</span></span>
-      </h1>
-      <p class="headline-note">*videos coming soon</p>
-
-      <p class="sub">
-        Stash keeps everything you save from anywhere, files it
-        into folders, and reminds you to come back to it.
-      </p>
-
-      <form class="waitlist" data-waitlist action="#" method="POST">
-        <label class="visually-hidden" for="email">Email address</label>
-        <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
-        <button type="submit" data-magnetic><span>Get early access</span></button>
-        <p class="form-note" role="status" aria-live="polite"></p>
-      </form>
-
-      <p class="hint" data-hint>Try it — drag a card into the box.</p>
-    </main>
-
-    <footer class="baseline">
-      <p>© 2026 Stash</p>
-      <p>Built for people with 400 open tabs</p>
-    </footer>
-  </div>
-
-  <p class="counter" data-counter aria-hidden="true"></p>
-  <div class="cursor" aria-hidden="true"></div>
-
-  <script type="module" src="main.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Stash keeps screenshots, links, images and reels in one calm, searchable place."><title>Stash — All your inspirations in one place</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Outfit:wght@300;400;500;600&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="./src/styles/tokens.css"><link rel="stylesheet" href="./src/styles/main.css"><link rel="stylesheet" href="./src/styles/interactions.css"></head><body>
+<nav class="nav shell"><a class="brand" href="#"><i></i>Stash</a><div><a href="#how">Why Stash</a><a class="pill" href="#join">Join Sneak Peek!</a></div></nav>
+<main><header class="hero shell"><p class="kicker">TestFlight beta · iOS + macOS</p><h1>All your inspirations<br>in one place</h1><p class="intro">Screenshots, links, images, reels. Stash keeps everything you save in one calm, searchable place instead of five different apps.</p><a class="pill hero-cta" href="#join">Join Sneak Peek!</a>
+<div class="demo-wrap"><figure class="desktop-app"><img src="./public/assets/devices/mac-light.png" alt="Stash for Mac listing view with spaces ready for saved inspiration"></figure>
+<figure class="phone"><img src="./public/assets/devices/iphone-light.png" alt="Stash home screen on iPhone showing a visual collection of saved inspiration"></figure></div></header>
+<section class="stash-workflow" id="how"><div class="workflow-section shell"><h2>Why Stash?</h2><div class="workflow-board"><article class="feature-card image-analysis"><div class="analysis-image"><img src="./public/assets/demo/try-it-out.png" alt="Small robots playing football"><div class="demo-result" id="filter-demo"><span class="image-tag tag-hand">Hand</span><span class="image-tag tag-shoes">Shoe</span><span class="image-tag tag-blue">Blue</span><span class="image-tag tag-ball">White</span><div class="color-options" aria-label="Colors extracted from the image"><button class="robot-cyan" aria-label="Teal"></button><button class="robot-orange" aria-label="Orange"></button><button class="robot-cream" aria-label="Cream"></button><button class="robot-charcoal" aria-label="Charcoal"></button><button class="robot-grey" aria-label="Grey"></button></div></div></div><div class="feature-copy"><h3>Image Analysis</h3><p>Colors extracted, tags assigned using the on device AI model</p></div></article><article class="feature-card moodboards"><div class="feature-copy"><h3>Moodboards</h3><p>Group similar inspirations into moodboards.</p></div><div class="moodboard-tags" aria-label="Example moodboard tags"><div class="moodboard-row moodboard-row-top"><span class="soft">Cars</span><span class="medium">Design</span><span>Recipes</span><span class="medium">Travel</span><span class="soft">Tech</span></div><div class="moodboard-row moodboard-row-bottom"><span class="medium">Branding</span><span>Instagram</span><span>Books</span><span class="medium">Colors</span></div></div></article><article class="feature-card powerful-search"><div class="feature-copy"><h3>Powerful search</h3><p>Search by tags, colors, content from images.</p></div><div class="search-query"><span class="search-field" aria-hidden="true"><span class="search-text">cars</span><span class="search-caret"></span></span></div></article><article class="feature-card device-sync"><div class="feature-copy"><h3>Sync across devices</h3></div><div class="sync-devices"><img class="sync-mac" src="./public/assets/devices/mac-light.png" alt="Stash collection on Mac"><img class="sync-phone" src="./public/assets/devices/iphone-light.png" alt="Stash collection on iPhone"></div></article></div></div></section>
+<section class="join shell" id="join"><div class="join-message"><p>Are you someone who hoards<br>inspiration?</p><h2>Stash them in!</h2><div class="join-rule"><a class="pill" href="#">Join Test Flight</a></div></div><span class="join-word" aria-hidden="true">STASH</span></section></main>
+<footer><div class="shell"><span>Stash</span><p>WIP by Ranga from Chennai</p></div></footer><script type="module" src="./src/scripts/main.js"></script></body></html>

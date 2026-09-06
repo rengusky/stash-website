@@ -1,35 +1,41 @@
 # Stash — Marketing Website
 
-Pre-launch landing page for [Stash](https://github.com/Rengusky/stash), the calm personal library app for iPhone, iPad and Mac. Static site, no build step — `three` and `gsap` load from the jsDelivr CDN via an import map.
+Pre-launch landing page for **Stash**, the calm personal library app for iPhone, iPad and Mac (iOS + macOS, currently TestFlight beta).
 
-The page is a single interactive section: link, image, and video cards drift in a WebGL scene and can be dragged (tapped on mobile) into a kraft "STASH" box, where they file themselves. Focusing the email field gathers the remaining cards; signing up stashes them all.
+Built with **Vite** (vanilla HTML/CSS/JS). Sections: Hero (Mac + iPhone) → "Why Stash?" (image analysis, moodboards, powerful search, device sync) → closing CTA/footer.
 
 ## Structure
 
 ```
-index.html    single-section landing
-styles.css    all styles
-main.js       Three.js scene, GSAP micro-interactions, waitlist submit
-assets/       favicon, future screenshots
+index.html              markup
+src/styles/tokens.css   design tokens — single source of truth (Vega-aligned)
+src/styles/main.css      base layout + components (consume tokens)
+src/styles/interactions.css  Why-Stash cards, scroll-reveal, closing/footer
+src/scripts/main.js      typewriter, IntersectionObserver reveals, parallax
+public/assets/           device mockups, demo imagery, Why-Stash SVGs
+public/privacy.html      privacy policy (served at /privacy.html)
+PROJECT_LOG.md           chronological record of decisions
 ```
 
-## Waitlist setup (one-time, ~2 minutes)
+## Design system
 
-The waitlist form posts to [Formspree](https://formspree.io):
+All brand/type/space/radius/shadow/motion values live in `src/styles/tokens.css`
+as CSS custom properties; `main.css` and `interactions.css` consume them. The token
+layer mirrors the conventions of the in-house component library **Vega**
+(`vega-ui`) — HSL-triplet colors, a `--radius` scalar, a 6-step shadow scale — themed
+for Stash (coral `#F8492F` + warm paper). Change `--brand` once to re-tint the page.
 
-1. Create a free Formspree account and a new form (name it "Stash waitlist").
-2. Copy the form ID from the endpoint it gives you (`https://formspree.io/f/<FORM_ID>`).
-3. In `main.js`, replace `YOUR_FORM_ID` in `FORMSPREE_ENDPOINT` with the real ID.
-
-Submissions appear in the Formspree dashboard and can be exported as CSV.
-
-## Run locally
+## Develop
 
 ```sh
-python3 -m http.server 8080
-# open http://localhost:8080
+npm install
+npm run dev      # dev server
+npm run build    # production build → dist/
+npm run preview  # preview the build
 ```
 
 ## Deploy
 
-Hosted on GitHub Pages, served from the `main` branch root. Pushing to `main` deploys automatically.
+Deployment target TBD (the previous static generation was served from GitHub Pages;
+this Vite version needs a build step — either publish `dist/` via Pages or host on
+Vercel/Netlify).

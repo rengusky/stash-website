@@ -1,1 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# ChatGPT-mirror scaffolding (not part of the site)
+AGENTS.md
+sources/
+tmp/
+
+# Local tooling / OS
+.claude/
 .DS_Store
+*.log
