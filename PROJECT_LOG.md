@@ -178,3 +178,11 @@ User shared the mobile design (Figma `ZRcbdxA3EPk7AHnt2TV7Zo`, node `738-994`) a
 3. **Bolder headline** (`.hero h1 { font-weight:700 }`) + controlled 2-line break re-enabled.
 4. **Short hero intro on mobile:** wrapped the extra sentence in `<span class="intro-more">` and hid it ≤760px; mobile shows only "Screenshots, links, images, reels."
 Also added "!" to the headline ("…in one place!") — shared copy, so it shows on desktop too (flagged and approved). Verified at 390px: 0 overflow, nav/CTA/intro-more hidden, h1 weight 700; desktop still has nav + hero button + full intro. Pushed to `main` → Vercel auto-deploy.
+
+## 2026-09-06 — Figma mobile review round 2
+Compared the live mobile against the Figma reference (sliced sections from the full-res export via a headless-Chrome offset-crop, since the Figma MCP hit the Starter-plan tool-call limit). Applied:
+1. **Removed the hero kicker** ("TestFlight beta · iOS + macOS") entirely — not in the design.
+2. **Moodboard now matches design:** (a) active chips (`:not(.soft):not(.medium)` → Recipes/Instagram/Books) are **coral-filled with white text** (global, desktop + mobile); (b) reverted the mobile chips from wrap-and-center back to **two non-wrapping rows that bleed off both edges** (`flex-wrap:nowrap; justify-content:center`), matching the design's scattered-tag look. Verified desktop + mobile.
+4. **Last section / footer:** the giant STASH watermark sat too high leaving empty space above the footer; lowered it on mobile (`.join-word` top 43→54% @760, 48→60% @500, font 31→33vw / 35→36vw) so the footer text overlaps its lower half like the design.
+
+Item 3 ("update content for sync") left pending — the design's sync card shows only the "Sync across devices" heading + device mockup (same as ours), so the intended content change is unclear; asked the user to clarify. Build passes; desktop unaffected.

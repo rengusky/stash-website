@@ -51,6 +51,8 @@ h1, h2, h3, h4, h5, h6, .brand, .join-word, footer .shell > span { font-family: 
 .moodboard-row { display: flex; align-items: center; height: 27px; }
 .moodboard-row span { height: 27px; padding: 4px 8px; border-radius: var(--radius-lg); background: hsl(var(--glass-light) / .45); backdrop-filter: blur(4px); white-space: nowrap; opacity: var(--o, 1); }
 .moodboard-row span.soft { --o: .2; }.moodboard-row span.medium { --o: .4; }
+/* active chips are coral-filled with white text (design: Recipes / Instagram / Books) */
+.moodboard-row span:not(.soft):not(.medium) { background: hsl(var(--brand)); color: #fff; }
 .moodboard-row-top { padding-inline: 48px; justify-content: space-between; }
 .moodboard-row-bottom { width: 389px; margin: 22px auto 0; gap: 24px; }
 
@@ -259,7 +261,7 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
   .join-message > p { font-size: 15px; }
   .join h2 { margin: 0; }
   .join-rule { margin-top: 18px; }
-  .join-word { top: 43%; bottom: auto; font-size: 31vw; }
+  .join-word { top: 54%; bottom: auto; font-size: 33vw; }
   footer { margin-top: -68px; }
   footer .shell { min-height: 68px; padding-inline: 28px; }
   footer p { font-size: 13px; }
@@ -268,7 +270,7 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
 @media (max-width: 500px) {
   .join { min-height: 350px; padding-top: 28px; }
   .join h2 { font-size: 38px; }
-  .join-word { top: 48%; bottom: auto; font-size: 35vw; }
+  .join-word { top: 60%; bottom: auto; font-size: 36vw; }
   footer .shell { flex-direction: row; padding-block: 0; }
 }
 
@@ -318,13 +320,13 @@ html, body { overflow-x: hidden; }
   .demo-wrap { margin-top: 36px; }
   .phone { width: min(240px, 66vw); }
 
-  /* Moodboard chips: bigger text; wrap and center so they never clip at the edges */
-  .workflow-board { grid-template-rows: 410px 250px 205px 264px; }
-  .moodboard-tags { top: 100px; right: 12px; left: 12px; }
-  .moodboard-row { font-size: 15px; height: auto; flex-wrap: wrap; }
-  .moodboard-row span { padding: 4px 10px; }
-  .moodboard-row-top { padding-inline: 0; justify-content: center; gap: 6px; row-gap: 8px; }
-  .moodboard-row-bottom { width: 100%; margin-top: 8px; justify-content: center; gap: 6px; row-gap: 8px; }
+  /* Moodboard chips: two non-wrapping rows that bleed off both edges (per design) */
+  .workflow-board { grid-template-rows: 410px 220px 205px 264px; }
+  .moodboard-tags { top: 104px; right: 0; left: 0; }
+  .moodboard-row { font-size: 15px; height: 27px; flex-wrap: nowrap; justify-content: center; gap: 8px; }
+  .moodboard-row span { padding: 4px 12px; }
+  .moodboard-row-top { padding-inline: 0; }
+  .moodboard-row-bottom { width: auto; margin-top: 14px; }
 
   /* Footer: spread the wordmark and credit apart (was bunched centered with an 8px gap) */
   footer .shell { justify-content: space-between; gap: 12px; padding-inline: 22px; }
