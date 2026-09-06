@@ -101,3 +101,20 @@ Symptom: the "Bricolage Grotesque" title font wasn't showing even though the CSS
 **Verify:** `npm run build` passes (CSS 25.32 kB). Headless Chrome full-page capture (JS on, tall window) confirms pixel-faithful render — coral pills+glow, Bricolage headings, card glows/dots, glass search, moodboard opacity hierarchy, STASH gradient all intact; no broken/transparent fills (proves every `hsl(var(--x)/a)` resolves). Dev server on 5175 rooted at Documents (5173 still serves the mirror).
 
 **Open / follow-ups:** (a) legacy dead CSS could be deleted outright in a future pass; (b) if the landing later grows interactive UI or should showcase Vega, revisit option 2 (React + real Vega components).
+
+## 2026-09-06 — Source control: GitHub repo `rengusky/stash-website`
+**Decision:** keep the code in **https://github.com/rengusky/stash-website** (gh auth: account `rengusky`).
+
+**Surprise found:** the repo was **not empty** — `main` holds a *different, older, currently-live* Stash site: a **Three.js + GSAP WebGL** single-section waitlist page (Formspree), plus `privacy.html`, deployed via **GitHub Pages** from `main` root with **no build step** (`.github/workflows/pages.yml`, `.nojekyll`). Our local project is a different generation (Vite app, needs a build). Flagged to user before touching anything.
+
+**Decisions (user):**
+- Push path: **new branch + PR**, leave `main` and the live site untouched → branch `vite-redesign`, **PR #1** (https://github.com/rengusky/stash-website/pull/1). Not merged.
+- **Preserve `privacy.html`** → moved to `public/privacy.html` (Vite serves it at `/privacy.html`); its `assets/favicon.svg` also preserved → `public/assets/favicon.svg`. Both came across as git renames (byte-identical).
+- Preserved deployment scaffolding (`.github/workflows/pages.yml`, `.nojekyll`) untouched in the PR.
+- Removed old flat site (`index.html` replaced, `styles.css`, `main.js` deleted).
+
+**Repo hygiene:** created `.gitignore` excluding `node_modules/`, `dist/`, `.DS_Store`, `*.log`, and the ChatGPT-mirror scaffolding (`AGENTS.md`, empty `sources/`, `tmp/`) + local `.claude/`. Added an accurate `README.md` for the Vite project (old README described the Three.js site). First commit `aa7bdf1`.
+
+**⚠️ Deployment caveat (must resolve before any `main` cutover):** old site = Pages from `main` root, no build. This version needs `npm run build`. Merging as-is breaks Pages (it would serve the unbuilt `index.html` referencing `/src/...`). Options: (1) update `pages.yml` to build Vite and publish `dist/`, or (2) host on Vercel/Netlify and repoint the domain. Until cutover, `main`/live site are safe.
+
+**Note:** the repo's `.github` and old site reference `Rengusky/stash` (the app repo) — the marketing site repo is `rengusky/stash-website`.
