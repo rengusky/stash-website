@@ -188,3 +188,10 @@ Compared the live mobile against the Figma reference (sliced sections from the f
 3. **Sync content:** the design's sync card shows only the heading + mockup (same as ours), so I asked what to change — user chose "add a subtitle line". Added one (it was the only card without a description): "Everything you save syncs across iPhone, iPad and Mac." (styled via the shared `.feature-copy p`). Verified on mobile; sits above the mockup.
 
 Build passes; desktop unaffected. All four items pushed to `main` → Vercel auto-deploy.
+
+## 2026-09-07 — Mobile round 3 (nav, bottom gradient, footer)
+1. **Re-added the top nav on mobile** (user reversed the earlier "hide nav" call) — brand + "Join Sneak Peek!" show again; hero CTA stays hidden (nav covers the top CTA).
+2. **Removed the floating bottom gradient on mobile** (`body::after { display:none }` ≤760) — the fixed home-state scrim read as a detached band on phones. Kept on desktop.
+3. **Footer/last section fixed.** Root cause of "still not fixed": the STASH watermark was rendering as a **solid pink rounded block**, not text — my mobile opacity override used the `background:` shorthand, which **reset `background-clip` to `border-box`**, killing the text clip. Fixed by using `background-image:` (preserves `background-clip:text`). Also: sized the word to 30vw so all 5 letters fit (was clipping to "STAS"), flattened the gradient (`.16`→`.11`, was fading to near-invisible), and lowered it (top 60%) so the footer text overlaps its lower half — matching the design. Footer wordmark lightened (medium/15px/45%) to match the design's grey treatment. Verified at true 390px via in-app DevTools (`.join-word` spans 33→357, `background-clip:text` active). NOTE: headless Chrome on this machine lays out wider than the requested 390px window (media queries misfire) — screenshots clip; the in-app browser at 390 is the reliable check.
+
+Desktop unaffected (all changes mobile-scoped or use `background-image` which desktop's base rule already used correctly). Pushed to `main` → Vercel auto-deploy.
