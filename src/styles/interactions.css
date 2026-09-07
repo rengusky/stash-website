@@ -261,7 +261,7 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
   .join-message > p { font-size: 15px; }
   .join h2 { margin: 0; }
   .join-rule { margin-top: 18px; }
-  .join-word { top: 54%; bottom: auto; font-size: 33vw; }
+  .join-word { top: 56%; bottom: auto; font-size: 30vw; background-image: linear-gradient(180deg, hsl(var(--brand) / .16), hsl(var(--brand) / .11)); }
   footer { margin-top: -68px; }
   footer .shell { min-height: 68px; padding-inline: 28px; }
   footer p { font-size: 13px; }
@@ -270,8 +270,9 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
 @media (max-width: 500px) {
   .join { min-height: 350px; padding-top: 28px; }
   .join h2 { font-size: 38px; }
-  .join-word { top: 60%; bottom: auto; font-size: 36vw; }
+  .join-word { top: 60%; bottom: auto; font-size: 32vw; background-image: linear-gradient(180deg, hsl(var(--brand) / .16), hsl(var(--brand) / .11)); }
   footer .shell { flex-direction: row; padding-block: 0; }
+  footer .shell > span { font-weight: var(--fw-medium); font-size: 15px; color: hsl(var(--foreground) / .45); }
 }
 
 /* ============================ Mobile optimizations ============================ */
@@ -279,9 +280,11 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
 html, body { overflow-x: hidden; }
 
 @media (max-width: 760px) {
-  /* Match the mobile design: no top nav, no hero button, bolder headline, short intro */
-  .nav { display: none; }
-  .hero { padding-top: 26px; }
+  /* Match the mobile design: bolder headline, short intro, hero CTA lives in the top nav */
+  .hero { padding-top: 20px; }
+
+  /* Drop the fixed bottom scrim on mobile — it floats as a detached band on phones */
+  body::after { display: none; }
   .hero h1 { font-weight: var(--fw-bold); }
   .hero h1 br { display: inline; }
   .hero-cta { display: none; }
