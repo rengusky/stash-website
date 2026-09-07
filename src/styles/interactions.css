@@ -268,9 +268,9 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
 }
 
 @media (max-width: 500px) {
-  .join { min-height: 340px; padding-top: 28px; }
+  .join { min-height: 300px; padding-top: 28px; }
   .join h2 { font-size: 38px; }
-  .join-word { top: 64%; bottom: auto; font-size: 38vw; background-image: linear-gradient(180deg, hsl(var(--brand) / .16), hsl(var(--brand) / .11)); }
+  .join-word { top: auto; bottom: -14%; font-size: 44vw; background-image: linear-gradient(180deg, hsl(var(--brand) / .16), hsl(var(--brand) / .11)); }
   footer .shell { flex-direction: row; padding-block: 0; }
   footer .shell > span { font-weight: var(--fw-medium); font-size: 15px; color: hsl(var(--foreground) / .45); }
 }
