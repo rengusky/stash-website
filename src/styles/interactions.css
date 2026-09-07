@@ -182,7 +182,7 @@ h1, h2, h3, h4, h5, h6, .brand, .join-word, footer .shell > span { font-family: 
   .moodboard-row-bottom { width: min(347px, calc(100% - 24px)); margin-top: 18px; justify-content: center; gap: 10px; }
   .powerful-search { padding: 25px 24px; }
   .device-sync { grid-column: auto; border-radius: var(--radius-lg); }
-  .sync-devices { inset: 0; }
+  .sync-devices { inset: 0; transform: translateX(16px); }
   .sync-mac { bottom: -20px; left: 4%; width: 72%; }
   .sync-phone { right: 7%; bottom: -30px; left: auto; width: 20%; }
 }
@@ -268,20 +268,26 @@ footer p { color: hsl(var(--foreground) / .45); font: var(--fw-medium) 15px var(
 }
 
 @media (max-width: 500px) {
-  .join { min-height: 350px; padding-top: 28px; }
+  .join { min-height: 340px; padding-top: 28px; }
   .join h2 { font-size: 38px; }
-  .join-word { top: 60%; bottom: auto; font-size: 30vw; background-image: linear-gradient(180deg, hsl(var(--brand) / .16), hsl(var(--brand) / .11)); }
+  .join-word { top: 64%; bottom: auto; font-size: 38vw; background-image: linear-gradient(180deg, hsl(var(--brand) / .16), hsl(var(--brand) / .11)); }
   footer .shell { flex-direction: row; padding-block: 0; }
   footer .shell > span { font-weight: var(--fw-medium); font-size: 15px; color: hsl(var(--foreground) / .45); }
 }
 
 /* ============================ Mobile optimizations ============================ */
-/* No horizontal panning: nothing may extend past the viewport width. */
-html, body { overflow-x: hidden; }
+/* No horizontal panning: nothing may extend past the viewport width.
+   Use `clip` (not `hidden`) so it doesn't become a scroll container — that
+   would break the sticky nav's `position: sticky`. */
+html, body { overflow-x: clip; }
+
+/* "Also available for Mac and iPad" — only shown on mobile, where just the iPhone appears */
+.also-available { display: none; }
 
 @media (max-width: 760px) {
   /* Match the mobile design: bolder headline, short intro, hero CTA lives in the top nav */
   .hero { padding-top: 20px; }
+  .also-available { display: block; margin: 16px auto 0; text-align: center; font: var(--fw-medium) 14px var(--font-body); color: var(--muted); }
 
   /* Drop the fixed bottom scrim on mobile — it floats as a detached band on phones */
   body::after { display: none; }
