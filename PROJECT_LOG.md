@@ -185,4 +185,6 @@ Compared the live mobile against the Figma reference (sliced sections from the f
 2. **Moodboard now matches design:** (a) active chips (`:not(.soft):not(.medium)` → Recipes/Instagram/Books) are **coral-filled with white text** (global, desktop + mobile); (b) reverted the mobile chips from wrap-and-center back to **two non-wrapping rows that bleed off both edges** (`flex-wrap:nowrap; justify-content:center`), matching the design's scattered-tag look. Verified desktop + mobile.
 4. **Last section / footer:** the giant STASH watermark sat too high leaving empty space above the footer; lowered it on mobile (`.join-word` top 43→54% @760, 48→60% @500, font 31→33vw / 35→36vw) so the footer text overlaps its lower half like the design.
 
-Item 3 ("update content for sync") left pending — the design's sync card shows only the "Sync across devices" heading + device mockup (same as ours), so the intended content change is unclear; asked the user to clarify. Build passes; desktop unaffected.
+3. **Sync content:** the design's sync card shows only the heading + mockup (same as ours), so I asked what to change — user chose "add a subtitle line". Added one (it was the only card without a description): "Everything you save syncs across iPhone, iPad and Mac." (styled via the shared `.feature-copy p`). Verified on mobile; sits above the mockup.
+
+Build passes; desktop unaffected. All four items pushed to `main` → Vercel auto-deploy.
