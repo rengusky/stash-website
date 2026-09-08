@@ -18,9 +18,9 @@
    ============================================================================ */
 :root {
   /* ── Color · brand (Stash coral) ──────────────────────────────────────── */
-  --brand:        8 93% 58%;    /* #F8492F — Stash coral */
-  --brand-strong: 9 73% 49%;    /* #D93C22 — hover / pressed */
-  --brand-tint:   10 89% 78%;   /* #F9A595 — focus ring */
+  --brand:        11 81% 52%;   /* #E8431F — Stash brand */
+  --brand-strong: 11 81% 43%;   /* #C63515 — hover / pressed */
+  --brand-tint:   11 81% 78%;   /* #F4AA99 — focus ring */
 
   /* ── Color · surfaces & ink (Vega semantic names) ─────────────────────── */
   --background:   38 33% 95%;   /* #F7F4EF — warm paper page ground */

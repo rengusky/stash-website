@@ -205,3 +205,8 @@ Desktop unaffected (all changes mobile-scoped or use `background-image` which de
 Verified in-app at 390px (nav sticks at top:0, no h-overflow) and desktop (nav sticks, `::before` bar = full width). Build passes. Pushed to `main` → Vercel auto-deploy.
 
 **Footer STASH follow-up:** the first pass still read as "not clipped" — the word sat *within* the section, so `overflow:hidden` never cut it (the transparent footer just overlapped it). Fixed by anchoring the word below the section bottom: `.join { min-height: 300px }`, `.join-word { top:auto; bottom:-14%; font-size:44vw }` — now the word extends past the closing section's bottom and its lower half is genuinely clipped at the footer line (bold, edge-bleeding, like the desktop web view). (@760 tablet range left as the contained version; phones ≤500 are the target.)
+
+## 2026-09-08 — Brand refresh: logo wordmark + brand color E8431F
+- **Brand color changed `#F8492F` → `#E8431F`** (HSL `11 81% 52%`). Updated the `--brand` token (+ `--brand-strong` `11 81% 43%`, `--brand-tint` `11 81% 78%`) in tokens.css — the whole page re-tinted automatically via `hsl(var(--brand)/a)` (glows, dots, chips, shadows, CTA, footer STASH). Also updated `theme-color` + `mask-icon` in index.html and regenerated the OG social image (`public/assets/og-cover.png`) with the new color.
+- **Navbar wordmark replaced with the real logo** (from `~/Desktop/App Logo.svg`): inlined the STASH letterform SVG in `.brand` with `fill="currentColor"`, colored `hsl(var(--brand))`, sized `height:26px` (22px ≤500). Removed the old coral-square `<i>` + "Stash" text. Logo scales crisply and themes with the brand token.
+- Verified via headless: nav shows the coral STASH logo; moodboard chips/glows and CTA all render in the new E8431F.
