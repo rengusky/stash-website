@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Stash</title>
-  <meta name="description" content="Stash's privacy policy: your data stays on your devices and in your private iCloud. No tracking, no analytics, no accounts.">
+  <meta name="description" content="Stash's privacy policy: your data stays on your devices and in your private iCloud. No ads, no tracking, no accounts; optional anonymous usage counts you control.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://stash-website-three.vercel.app/privacy.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -52,12 +52,14 @@
     <p class="wordmark"><a href="index.html">STASH</a></p>
 
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: July 9, 2026</p>
+    <p class="updated">Last updated: September 11, 2026</p>
 
     <p class="tldr">
       The short version: everything you save in Stash stays on your devices and in
-      your personal iCloud. We run no servers, require no account, and use no
-      tracking or analytics. We can't see your data — and we like it that way.
+      your personal iCloud. There is no account, no advertising, and no cross-app
+      tracking. The only thing that can ever leave your device is an optional,
+      anonymous count of what you create — and only if you switch it on. We can't
+      see your saved content, and we like it that way.
     </p>
 
     <h2>What Stash stores</h2>
@@ -72,7 +74,7 @@
       <li><strong>On your device.</strong> Your saved items are stored in the app's private storage on your iPhone, iPad, or Mac.</li>
       <li><strong>In your private iCloud.</strong> If you're signed in to iCloud, Stash syncs your items between your devices using Apple's CloudKit, in your personal, private iCloud database. This data is tied to your Apple Account, counts toward your iCloud storage, and is encrypted by Apple in transit and at rest. The developer has no access to it.</li>
     </ul>
-    <p>Stash operates no servers of its own. Your data is never sent to us — we could not read it if we wanted to.</p>
+    <p>Your saved content — links, images, videos, and notes — is never sent to us and never leaves your device and your private iCloud. The only exception is the optional, anonymous usage analytics described below, which sends counts only, never your content.</p>
 
     <h2>On-device analysis</h2>
     <p>
@@ -90,12 +92,33 @@
       Stash adds no identifiers to these requests.
     </p>
 
+    <h2>Anonymous usage analytics (optional, off by default)</h2>
+    <p>
+      Stash includes an optional setting — <strong>Share Anonymous Usage</strong>, in
+      Settings — that is <strong>off by default</strong>. It does nothing unless you
+      turn it on. When it is on, Stash sends an anonymous count each time you create
+      something, so we can understand how the app is used at an aggregate level.
+    </p>
+    <p>Each count includes only:</p>
+    <ul>
+      <li>the <strong>type</strong> of item created (moodboard, image, video, link, or note);</li>
+      <li>whether it was created <strong>in the app</strong> or via the <strong>Share Extension</strong>;</li>
+      <li>the platform (iOS or macOS) and app build number;</li>
+      <li>a <strong>random identifier</strong> generated on your device, not tied to your Apple Account, iCloud, name, email, or any personal identity.</li>
+    </ul>
+    <p>
+      It never includes any of your saved content — no titles, URLs, text, tags,
+      captions, images, or videos. The counts go to a small first-party endpoint the
+      developer operates (on Cloudflare); no third-party analytics or advertising
+      service is involved. You can turn the setting off at any time to stop sending.
+    </p>
+
     <h2>What we don't do</h2>
     <ul>
-      <li>No analytics or usage tracking of any kind.</li>
       <li>No advertising, and no advertising identifiers.</li>
+      <li>No tracking of you across other apps or websites.</li>
+      <li>No third-party analytics or advertising SDKs.</li>
       <li>No selling, sharing, or transferring of your data to anyone.</li>
-      <li>No third-party SDKs that phone home.</li>
     </ul>
 
     <h2>Deleting your data</h2>
