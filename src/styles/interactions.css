@@ -340,3 +340,33 @@ html, body { overflow-x: clip; }
   /* Footer: spread the wordmark and credit apart (was bunched centered with an 8px gap) */
   footer .shell { justify-content: space-between; gap: 12px; padding-inline: 22px; }
 }
+
+/* ---------- Mac preview: "cards added" feed (desktop/tablet only — Mac hidden on mobile) ---------- */
+.desktop-app { position: relative; container-type: inline-size; }
+.mac-feed {
+  position: absolute;
+  top: 5.4%; left: 17.6%; right: 1.8%; bottom: 0;
+  display: flex;
+  gap: 1.15cqw;
+  padding: 1.4cqw 1.4cqw 0;
+  overflow: hidden;
+  background: #fff;
+  pointer-events: none;
+  z-index: 1;
+}
+.mac-col { flex: 1 1 0; min-width: 0; overflow: hidden; }
+.mac-track { display: flex; flex-direction: column; gap: 1.15cqw; }
+.mac-card-wrap {
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  transition: grid-template-rows .6s cubic-bezier(.2, .85, .28, 1.04), opacity .45s ease;
+}
+.mac-card-wrap > img {
+  min-height: 0;
+  width: 100%; height: auto; display: block;
+  border-radius: 1cqw;
+  transition: transform .55s cubic-bezier(.2, .85, .28, 1.04);
+}
+.mac-card-wrap.enter { grid-template-rows: 0fr; opacity: 0; }
+.mac-card-wrap.enter > img { transform: translateY(-16px) scale(.97); }

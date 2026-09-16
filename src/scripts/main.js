@@ -67,6 +67,55 @@ document.querySelectorAll('.tag-options button, .color-options button').forEach(
   });
 });
 
+// Mac preview "living feed": new cards keep dropping into the top of each column,
+// nudging the others down. Desktop/tablet only (the Mac is display:none on mobile);
+// with reduced motion or no JS the initial cards render as a static grid.
+function initMacFeed() {
+  const feed = document.querySelector('.mac-feed');
+  if (!feed || motionPreference.matches) return;
+  if (!window.matchMedia('(min-width: 761px)').matches) return;
+
+  feed.querySelectorAll('.mac-col').forEach((col, i) => {
+    const track = col.querySelector('.mac-track');
+    const pool = (col.dataset.pool || '').split(',').filter(Boolean);
+    if (!track || !pool.length) return;
+    let idx = 1; // initial cards already show pool[0] on top — continue from the next
+
+    const addCard = () => {
+      // Don't add while the tab is hidden — rAF is paused there, so new cards
+      // would stay collapsed (0-height) and pile up. Resume when visible again.
+      if (document.hidden) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'mac-card-wrap enter';
+      const img = new Image();
+      img.src = '/assets/mac-feed/card_' + pool[idx % pool.length];
+      img.alt = '';
+      img.decoding = 'async';
+      idx += 1;
+      wrap.appendChild(img);
+      track.prepend(wrap);
+      // lay out collapsed, then open → grow + fade in. setTimeout (not rAF) so it
+      // still fires when the tab is throttled/not compositing (rAF pauses there).
+      window.setTimeout(() => wrap.classList.remove('enter'), 40);
+      // drop cards that have scrolled below the visible area (by count, then height)
+      window.setTimeout(() => {
+        while (track.children.length > 12) track.removeChild(track.lastElementChild);
+        const keep = col.clientHeight * 2.4;
+        while (track.scrollHeight > keep && track.children.length > 5) {
+          track.removeChild(track.lastElementChild);
+        }
+      }, 720);
+    };
+
+    const schedule = () => {
+      const gap = 6500 + i * 400 + Math.random() * 2200; // calmer, staggered per column
+      window.setTimeout(() => { addCard(); schedule(); }, gap);
+    };
+    window.setTimeout(schedule, 1400 + i * 900);
+  });
+}
+initMacFeed();
+
 const hero = document.querySelector('.hero');
 const demoWrap = document.querySelector('.demo-wrap');
 const phone = document.querySelector('.phone');
