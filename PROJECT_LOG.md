@@ -247,3 +247,10 @@ Polished the drop-in feed after reviewing it live.
 - **Shape-varied leads:** first pass led every column with a landscape 4:3 webp → the top row read as one repeated wide rectangle. Reordered so the top row **alternates wide → tall → wide → tall**: `card_20` (lime, wide), `card_19` (Dutch floral still-life, tall), `card_23` (blue flower, wide), `card_11` (railroad graphic, tall). Tall leads stagger the masonry naturally. The pale `card_01` is demoted deep into a rotation so it never leads.
 - **Fill fix:** the tall-led column 4 fell ~28 px short of the bottom, so added a 5th seed card — all four columns now fill top-to-bottom (verified track height ≥ column height, images loaded).
 - Verified in the in-app browser (taller emulated viewport to bring the whole feed on-screen): vibrant, dense, staggered top row; no white gap. Build passes.
+
+## 2026-11-27 — Hero asset: stronger device shadow (branch: hero-shadow)
+The Mac mockup sat too flat against the warm paper background — the shadow was too light to give the asset focus.
+- **Deepened `--shadow-device`** (tokens.css): `0 24px 26px / .14` → **`0 34px 55px hsl(var(--foreground) / .28)`** (larger offset + blur, double the opacity).
+- **Added a contact-shadow layer** on `.desktop-app` (main.css): the filter is now `drop-shadow(0 3px 8px / .1) drop-shadow(var(--shadow-device))` — a tight contact shadow under a deeper ambient one, so the window reads as genuinely lifted rather than just darkened. Uses `drop-shadow` (not `box-shadow`) because the Mac PNG has transparent rounded corners — drop-shadow follows the alpha shape.
+- The iPhone's `--shadow-phone` was left unchanged this pass.
+- Verified in the in-app browser (computed filter confirmed) — the window now clearly separates from the background. Build passes.

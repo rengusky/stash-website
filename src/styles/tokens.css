@@ -103,7 +103,7 @@
   /* ── Elevation · Stash component shadows (brand/ink-tinted signatures) ──── */
   --shadow-pill:       0 10px 21px hsl(var(--brand) / .3);
   --shadow-pill-hover: 0 14px 26px hsl(var(--brand) / .4);
-  --shadow-device:     0 24px 26px hsl(var(--foreground) / .14);
+  --shadow-device:     0 34px 55px hsl(var(--foreground) / .28);
   --shadow-phone:      0 24px 24px hsl(var(--foreground) / .2);
   --shadow-glass:      0 0 10px hsl(0 0% 0% / .15), inset 0 1px 0 hsl(0 0% 100% / .22);
 
