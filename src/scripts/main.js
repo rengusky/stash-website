@@ -67,6 +67,15 @@ document.querySelectorAll('.tag-options button, .color-options button').forEach(
   });
 });
 
+// App Store download tracking: campaign tokens (ct=Website) attribute installs in
+// App Store Connect; this fires a Vercel Web Analytics custom event per button so we
+// also see click-through and which placement (nav/hero/footer) was used.
+document.querySelectorAll('a[href*="apps.apple.com"]').forEach((link) => {
+  link.addEventListener('click', () => {
+    window.va?.('event', { name: 'app_store_click', data: { placement: link.dataset.cta || 'other' } });
+  });
+});
+
 // Mac preview "living feed": new cards keep dropping into the top of each column,
 // nudging the others down. Desktop/tablet only (the Mac is display:none on mobile);
 // with reduced motion or no JS the initial cards render as a static grid.
@@ -119,6 +128,7 @@ initMacFeed();
 const hero = document.querySelector('.hero');
 const demoWrap = document.querySelector('.demo-wrap');
 const phone = document.querySelector('.phone');
+const heroCopy = document.querySelector('.hero-copy');
 const closingSection = document.querySelector('.join');
 const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
 
@@ -134,18 +144,31 @@ function updateScrollEffects() {
   if (reducedMotion) {
     demoWrap?.style.setProperty('--hero-desktop-depth', '0px');
     phone?.style.setProperty('--hero-phone-depth', '0px');
+    heroCopy?.style.setProperty('--hero-copy-pin', '0px');
+    heroCopy?.style.setProperty('--hero-copy-scale', '1');
+    heroCopy?.style.setProperty('--hero-copy-fade', '1');
     closingSection?.style.setProperty('--closing-copy-depth', '0px');
     closingSection?.style.setProperty('--closing-word-depth', '0px');
     return;
   }
 
   if (window.matchMedia('(min-width: 761px)').matches && hero) {
-    const heroProgress = clamp(scrollY / Math.max(hero.offsetHeight * .88, 1), 0, 1);
-    demoWrap?.style.setProperty('--hero-desktop-depth', `${heroProgress * 28}px`);
-    phone?.style.setProperty('--hero-phone-depth', `${heroProgress * -38}px`);
+    // Pin the copy while it scales: translate it DOWN by the scroll amount (capped to
+    // pinRange) so it cancels the page scroll and stays visually fixed — it only scales
+    // down in place. The devices scroll up naturally and pass over it. Released past the range.
+    const pinRange = 420;
+    const heroProgress = clamp(scrollY / pinRange, 0, 1);
+    heroCopy?.style.setProperty('--hero-copy-pin', `${Math.min(scrollY, pinRange)}px`);
+    heroCopy?.style.setProperty('--hero-copy-scale', `${1 - heroProgress * 0.28}`);
+    heroCopy?.style.setProperty('--hero-copy-fade', `${1 - heroProgress * 0.5}`);
+    demoWrap?.style.setProperty('--hero-desktop-depth', '0px');
+    phone?.style.setProperty('--hero-phone-depth', '0px');
   } else {
     demoWrap?.style.setProperty('--hero-desktop-depth', '0px');
     phone?.style.setProperty('--hero-phone-depth', '0px');
+    heroCopy?.style.setProperty('--hero-copy-pin', '0px');
+    heroCopy?.style.setProperty('--hero-copy-scale', '1');
+    heroCopy?.style.setProperty('--hero-copy-fade', '1');
   }
 
   if (closingSection) {
