@@ -221,7 +221,13 @@ body::after {
 body.is-scrolled::after { opacity: 0; transform: translateY(18px); }
 
 @media (min-width: 761px) {
-  .demo-wrap { transform: translateX(-50%) translateY(var(--hero-desktop-depth, 0px)); }
+  /* Scroll choreography: the device asset rises up and over the headline (z above),
+     while the copy below it shrinks and fades back. Depth vars are set in main.js. */
+  /* Pin the copy in place while scaling: the --hero-copy-pin translate (set in main.js)
+     cancels the page scroll so it stays visually fixed and only scales as one unit around
+     its common centre, while the devices scroll up and over it. */
+  .hero-copy { position: relative; z-index: 1; transform-origin: center center; transform: translateY(var(--hero-copy-pin, 0px)) scale(var(--hero-copy-scale, 1)); opacity: var(--hero-copy-fade, 1); will-change: transform, opacity; }
+  .demo-wrap { z-index: 2; transform: translateX(-50%) translateY(var(--hero-desktop-depth, 0px)); }
   .phone { transform: translateY(var(--hero-phone-depth, 0px)); }
   .phone:hover { transform: translateY(calc(var(--hero-phone-depth, 0px) - 6px)); }
 }
@@ -311,7 +317,7 @@ html, body { overflow-x: clip; }
     display: flex;
     justify-content: center;
   }
-  .desktop-app { display: none; }
+  .desktop-app, .tablet { display: none; }
   .phone {
     position: static;
     inset: auto;
